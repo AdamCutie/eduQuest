@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Assignment Dashboard</title>
+  <link rel="stylesheet" href="quizdashboard.css">
+</head>
+<body>
+  <header>
+    <button class="menu-btn" onclick="toggleSidebar()">&#9776;</button>
+    <button class="logo-btn">
+      <a href="student-home.php"><img src="eduquest.png" alt="Eduquest Logo" style="height: 70px; width: auto;"></a>
+    </button>
+    <button class="join-btn">Join Class</button>
+	<span class="points">✨ 0.00</span>
+    <button class="shop-btn">
+      <a href="shop.html"><img src="shopping-cart.png" alt="cart" style="height: 40px; width: auto;"></a>
+    </button>
+    <button class="acc-btn">
+      <a href="account.html"><img src="account.png" alt="profile" style="height: 40px; width: auto;"></a>
+    </button>
+  </header>
+
+  <aside id="sidebar" class="hover-active">
+    <nav>
+      <a href="student-home.php">
+        <span class="icon">🏠</span><span class="label">Home</span>
+      </a>
+      <a href="student-task.html">
+        <span class="icon">📝</span><span class="label">Tasks</span>
+      </a>
+      <a href="leaderboards.html">
+        <span class="icon">🏆</span><span class="label">Leaderboard</span>
+      </a>
+     
+    </nav>
+  </aside>
+
+    <div class="assignment-box">
+      <div class="left-section">
+        <button class="back-btn" onclick="window.location.href='student-alltopics.php'"><img src="back-button.png" alt="back_arrow"></button>
+        <div class="assignment-header">
+          <p><strong>Quiz Title</strong></p>
+          <p>Due Date:</p>
+          <p>Score: ___ /100</p>
+        </div>
+
+        <div class="assignment-description">
+          <button class="attach-btn">Answer</button>
+          <div class="message-box">💬 Public Message</div>
+        </div>
+      </div>
+
+      <div class="right-panel">
+        <div class="message-box">💬 Private Message</div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('show');
+    }
+  </script>
+</body>
+</html>

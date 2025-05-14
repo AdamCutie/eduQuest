@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500&display=swap" rel="stylesheet">
+  <title>EduQuest</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Fredoka', sans-serif;
+      background-color: #66bb6a;
+    }
+
+    header {
+      background-color: #2e7d32;
+      padding: 0px 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+      position: fixed;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+	
+	.points{
+	  background-color: #e8f5e9;
+	  color: #2e7d32;
+	  border-radius: 50px;
+	  padding: 10px 8px;
+	  text-align: center;
+	  font-weight: bold;
+    }
+
+    .menu-btn {
+      background-color: #2e7d32;
+      color: white;
+      font-size: 25px;
+      border: 10px;
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: 5px;
+    }
+
+    .join-btn {
+      background-color: #43a047;
+      color: white;
+      font-size: 16px;
+      padding: 12px 10px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-left: auto;
+      text-align: center;
+    }
+
+    .join-btn:hover {
+      background-color: #388e3c;
+    }
+
+    .logo-btn,
+    .shop-btn {
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+    
+    .acc-btn
+    {
+      border: none;
+      background: none;
+      cursor: pointer;
+      margin-right: 30px;
+    }
+
+    aside {
+      width: 60px;
+      background-color: #1b5e20;
+      color: white;
+      padding: 80px 10px;
+      height: 100vh;
+      box-sizing: border-box;
+      position: fixed;
+      left: 0;
+      overflow: hidden;
+      transition: width 0.3s ease;
+      z-index: 1;
+    }
+
+    aside.hover-active:hover,
+    aside.show {
+      width: 300px;
+    }
+
+    aside nav a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      text-decoration: none;
+      color: white;
+      font-size: 18px;
+      background-color: #2e7d32;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    aside nav a:hover {
+      background-color: #43a047;
+    }
+
+    .icon {
+      font-size: 22px;
+      min-width: 30px;
+      text-align: center;
+    }
+
+    .label {
+      display: none;
+      margin-left: 15px;
+      white-space: nowrap;
+    }
+
+    aside.hover-active:hover .label,
+    aside.show .label {
+      display: inline;
+    }
+
+    .panel {
+      background: #f1f8e9;
+      border-radius: 15px;
+      padding: 50px 20px;
+      height: 100%;
+      margin-left: 80px;
+      margin-right: 20px;
+      transition: margin-left 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    aside.hover-active:hover ~ .panel,
+    aside.show ~ .panel {
+      margin-left: 300px;
+      margin-right: 0px;
+      height: 100%;
+    }
+
+    .class-panel {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 10px;
+      padding: 0px 0px;
+    }
+
+    .class-card {
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+      border: 1px solid #c8e6c9;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .class-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(46, 125, 50, 0.2);
+      border-color: #81c784;
+    }
+
+    .class-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.5rem;
+      color: #2e7d32;
+    }
+
+    .class-card p {
+      font-size: 1rem;
+      color: #66bb6a;
+    }
+    
+    .class-card h4 {
+      color: #43a047;
+    }
+    
+    .class-card a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    h1 {
+      color: #1b5e20;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <button class="menu-btn" onclick="toggleSidebar()">&#9776;</button>
+    <button class="logo-btn">
+      <a href="student-home.html"><img src="eduquest.png" alt="Eduquest Logo" style="height: 50px; width: auto;"></a>
+    </button>
+    <button class="join-btn">Join Class</button>
+	<span class="points">✨ 0.00</span>
+    <button class="shop-btn">
+      <a href="shop.html"><img src="shopping-cart.png" alt="cart" style="height: 30px; width: auto;"></a>
+    </button>
+    <button class="acc-btn">
+      <a href="account.html"><img src="account.png" alt="profile" style="height: 30px; width: auto;"></a>
+    </button>
+  </header>
+
+  <aside id="sidebar" class="hover-active">
+    <nav>
+      <a href="student-home.html">
+        <span class="icon">🏠</span><span class="label">Home</span>
+      </a>
+      <a href="student-task.html">
+        <span class="icon">📝</span><span class="label">Tasks</span>
+      </a>
+      <a href="leaderboards.html">
+        <span class="icon">🏆</span><span class="label">Leaderboard</span>
+      </a>
+      <a href="student-settings.html">
+        <span class="icon">⚙️</span><span class="label">Settings</span>
+      </a>
+    </nav>
+  </aside>
+
+  <div class="panel">
+    <h1>Classrooms</h1>
+    <div class="class-panel">
+      <div class="class-card">
+        <a href="student-alltopics.html"><h3>Subject name</h3></a>
+		    <h4>Teacher's name</h4>
+        <p>subject description(optional)</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('show');
+    }
+  </script>
+</body>
+</html>

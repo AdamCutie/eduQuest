@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500&display=swap" rel="stylesheet">
+  <title>EduQuest/Classroom</title>
+  <style>
+    header {
+      background-color: #5E4CC2;
+      padding: 0px 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Fredoka', sans-serif;
+      background: radial-gradient(100% 259.2% at 72.65% 0%, #FFF8A7 16%, #FFA973 34%, #A4E8ED 72%);
+    }
+
+    .panel {
+      background: linear-gradient(to right, #5E4CC2, #8E79E6);
+      margin: 5px 30px;
+      padding: 20px;
+      border-radius: 20px;
+      height: auto;
+      color: white;
+      text-align: center;
+      display: flex;
+      flex-direction: column; 
+      align-items: center;
+    }
+
+    .class-accounts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 50px;
+      width: 100%;
+      max-width: 1000px;
+      margin: 0px auto;
+      padding: 10px 0px;
+      justify-items: center;
+    }
+
+    .accounts {
+      background-color: rgba(47, 40, 91, 0.8); 
+      border-radius: 20px;
+      padding: 60px 100px;
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+      border: 1px solid gray;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .accounts h2 {
+      color: white;
+      font-size: 20px;
+    }
+
+    .accounts:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    a {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .acc-btn {
+      border: none;
+      background: none;
+      cursor: pointer;
+      margin-left: auto;
+    }
+
+    h1 {
+      text-transform: uppercase; 
+      text-shadow: 1px 1px 4px #000000; 
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    .class-accounts > a:nth-child(4) {
+      grid-column: 1 / -1; /* Make "Create Class" span the entire row */
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <img src="eduquest.png" alt="Eduquest Logo" style="height: 60px; width: auto;">
+    </div>
+   <button class="acc-btn">
+  <a href="logout.php" onclick="return confirm('Are you sure you want to sign out?');"><img src="logout.png" alt="sign out" style="height: 40px; width: auto;"><span style="margin-left: 5px;"></span></a>
+</button>
+  </header>
+  <div class="panel">
+    <h1>Manage Accounts</h1>
+    <div class="class-accounts">
+      <a href="admin_students.php" class="accounts">
+        <h2>Student Accounts</h2>
+      </a>
+      <a href="admin_teachers.php" class="accounts">
+        <h2>Teacher Accounts</h2>
+      </a>
+      <a href="admin_admins.php" class="accounts">
+        <h2>Admin Accounts</h2>
+      </a>
+      <a href="admin_classes.php" class="accounts">
+        <h2>All Classes</h2>
+      </a>
+    </div>
+  </div>
+  
+</body>
+</html>

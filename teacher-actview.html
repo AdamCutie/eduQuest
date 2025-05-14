@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="EduQuest - Classroom management and learning platform for teachers">
+  <title>EduQuest</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #5E4CC2;
+      --secondary-color: #2F285B;
+      --accent-color: #00B894;
+      --text-color: #333;
+      --light-bg: #f4f4f4;
+      --blue-accent: #3c98ff;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: #6f62d2;
+      color: var(--text-color);
+    }
+
+    header {
+      background-color: var(--primary-color);
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .menu-btn {
+      background-color: var(--primary-color);
+      color: white;
+      font-size: 25px;
+      border: none;
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: 5px;
+    }
+
+    .logo-btn, .acc-btn {
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+
+    .acc-btn {
+      margin-left: auto;
+    }
+
+    aside {
+      width: 60px;
+      background-color: var(--secondary-color);
+      color: white;
+      padding: 15px 10px;
+      height: 100vh;
+      box-sizing: border-box;
+      position: fixed;
+      left: 0;
+      overflow: hidden;
+      transition: width 0.3s ease;
+      z-index: 1;
+    }
+
+    aside.hover-active:hover,
+    aside.show {
+      width: 300px;
+    }
+
+    aside nav a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      text-decoration: none;
+      color: white;
+      font-size: 18px;
+      background-color: var(--primary-color);
+      border-radius: 8px;
+      margin-bottom: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    aside nav a:hover {
+      background-color: black;
+    }
+
+    .icon {
+      font-size: 22px;
+      min-width: 30px;
+      text-align: center;
+    }
+
+    .label {
+      display: none;
+      margin-left: 15px;
+      white-space: nowrap;
+    }
+
+    aside.hover-active:hover .label,
+    aside.show .label {
+      display: inline;
+    }
+
+    .subject-box {
+      background: white;
+      border-radius: 15px;
+      padding: 1rem;
+      margin-left: 80px;
+      margin-right: 20px;
+      margin-top: 20px;
+      transition: margin-left 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    aside.hover-active:hover ~ .subject-box,
+    aside.show ~ .subject-box {
+      margin-left: 320px;
+    }
+
+    .subject-header {
+      background: var(--blue-accent);
+      color: white;
+      padding: 1rem;
+      border-radius: 12px 12px 0 0;
+      margin: -1rem -1rem 1rem -1rem;
+    }
+
+    .subject-header h2 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    .subject-header p {
+      margin: 0.25rem 0 0;
+      font-size: 1rem;
+    }
+
+    .filters {
+      margin: 1rem 0;
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .filter-btn {
+      padding: 0.5rem 1rem;
+      background-color: white;
+      color: black;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+
+    .filter-btn:hover {
+      background-color: #e0e0e0;
+      border-color: #bbb;
+    }
+
+    .main-content {
+      flex-grow: 1;
+      padding: 1rem;
+      background: white;
+      border-radius: 8px;
+    }
+
+    .grades-table {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    .grades-table table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    .grades-table th {
+      background-color: var(--light-bg);
+      padding: 12px 15px;
+      text-align: left;
+      font-weight: bold;
+      border-bottom: 2px solid #ddd;
+    }
+
+    .grades-table td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .grades-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .grades-table tr:hover {
+      background-color: rgba(0,0,0,0.02);
+    }
+
+    .action-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 15px;
+      align-items: center;
+    }
+
+    .action-btn {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .return-btn {
+      background-color: #6c5ce7;
+      color: white;
+    }
+
+    .return-btn:hover {
+      background-color: #5948b7;
+    }
+
+    .missing-btn {
+      background-color: #d63031;
+      color: white;
+    }
+
+    .missing-btn:hover {
+      background-color: #c8231d;
+    }
+
+    .email-btn {
+      background-color: #0984e3;
+      color: white;
+    }
+
+    .email-btn:hover {
+      background-color: #0767c6;
+    }
+
+    .status-counters {
+      display: flex;
+      gap: 10px;
+      margin-left: auto;
+    }
+
+    .status-counter {
+      text-align: center;
+      padding: 5px 10px;
+      background: white;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      font-size: 14px;
+    }
+
+    .status-counter small {
+      display: block;
+      font-size: 12px;
+      color: #666;
+    }
+
+    .student-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      border: 1px solid #ddd;
+    }
+
+    .student-card.missing {
+      border-left: 4px solid #d63031;
+    }
+
+    .student-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .student-name {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .missing-label {
+      color: #d63031;
+      font-weight: bold;
+    }
+    .email-icon {
+    color: #0984e3; /* same blue as before */
+    font-size: 18px;
+    display: inline-block;
+    padding: 8px;
+  }
+
+
+    
+
+    @media (max-width: 768px) {
+      aside {
+        width: 60px;
+      }
+      aside.show {
+        width: 200px;
+      }
+      .subject-box {
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-top: 80px;
+      }
+      aside.show ~ .subject-box {
+        margin-left: 220px;
+      }
+      .action-buttons {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .status-counters {
+        margin-left: 0;
+        margin-top: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <button class="menu-btn" onclick="toggleSidebar()" aria-label="Toggle sidebar" aria-expanded="false" aria-controls="sidebar">&#9776;</button>
+    <button class="logo-btn">
+      <a href="teacher-home.html"><img src="eduquest.png" alt="EduQuest Logo" width="70" height="70"></a>
+    </button>
+    <button class="acc-btn">
+      <a href="account.html"><img src="account.png" alt="User profile" width="40" height="40"></a>
+    </button>
+  </header>
+
+  <aside id="sidebar" class="hover-active">
+    <nav>
+      <a href="teacher-home.html"><span class="icon">🏠</span><span class="label">Home</span></a>
+      <a href="teacher-task.html"><span class="icon">📝</span><span class="label">Tasks</span></a>
+      <a href="teacher-leadboard.html"><span class="icon">🏆</span><span class="label">Leaderboard</span></a>
+      <a href="settings.html"><span class="icon">🔔</span><span class="label">Notification</span></a>
+    </nav>
+  </aside>
+
+  <section class="subject-box" aria-labelledby="subject-title">
+    <div class="subject-header">
+      <div>
+        <h2 id="subject-title">Subject Name</h2>
+        <p id="subject-section">Section</p>
+      </div>
+    </div>
+
+    <div class="filters">
+      <button class="filter-btn active" onclick="window.location.href='teacher-alltopics.html'">All Topics</button>
+      <button class="filter-btn" onclick="window.location.href='teacher-act.html'">Activities</button>
+      <button class="filter-btn" onclick="window.location.href='teacher-People.html'">People</button>
+      <button class="filter-btn" onclick="window.location.href='teacher-grades.html'">Grades</button>
+      <div class="status-counters">
+        <div class="status-counter">0<br><small>Pending</small></div>
+        <div class="status-counter">1<br><small>Missing</small></div>
+        <div class="status-counter">0<br><small>Graded</small></div>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <div class="grades-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Activity</th>
+              <th><button class="return-btn action-btn">Return</button></th>
+              <th><button class="missing-btn action-btn">Missing</button></th>
+              <th><button class="email-btn action-btn"><i class="fas fa-envelope"></i> Email</button></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="checkbox-cell">
+                <input type="checkbox" checked>
+                <span>Fullname /100</span>
+              </td>
+              <td><button class="action-btn attach-btn"><i class="fas fa-paperclip"></i> Attach Files</button></td>
+              <td></td>
+              <td><span class="email-icon"><i class="fas fa-envelope"></i> example@gmail.com</span></td>
+            </tr>
+            <tr>
+              <td class="checkbox-cell">
+              <input type="checkbox">
+              <span>Fullname <span class="missing-label">Missing</span></span>
+              </td>
+              <td><span class="missing-text">No Files</span></td>
+              <td></td>
+              <td><span class="email-icon"><i class="fas fa-envelope"></i> example@gmail.com</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const btn = document.querySelector('.menu-btn');
+      const isShown = sidebar.classList.toggle('show');
+      btn.setAttribute('aria-expanded', isShown);
+    }
+
+    document.addEventListener('click', function(event) {
+      if (!event.target.matches('.filter-btn')) {
+        const dropdowns = document.querySelectorAll('.dropdown-content');
+        dropdowns.forEach(dropdown => {
+          dropdown.style.display = 'none';
+        });
+      }
+    });
+  </script>
+</body>
+</html>

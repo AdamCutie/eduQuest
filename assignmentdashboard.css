@@ -1,0 +1,250 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #6f62d2;
+}
+
+header {
+  background-color: #5E4CC2;
+  padding: 0px 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.points{
+background-color: white;
+border-radius: 50px;
+padding:12px;
+text-align: center;
+}
+
+.menu-btn {
+  background-color: #5E4CC2;
+  color: white;
+  font-size: 25px;
+  border: none;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 5px;
+}
+
+.join-btn {
+  background-color: #00B894;
+  color: white;
+  font-size: 16px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: auto;
+  text-align: center;
+}
+
+.join-btn:hover {
+  background-color: #019174;
+}
+
+.shop-btn,
+.logo-btn,
+.acc-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+aside {
+  width: 60px;
+  background-color: #2F285B;
+  color: white;
+  padding: 15px 10px;
+  height: 100vh;
+  box-sizing: border-box;
+  position: fixed;
+  left: 0;
+  overflow: hidden;
+  transition: width 0.3s ease;
+  z-index: 1;
+}
+
+aside.hover-active:hover,
+aside.show {
+  width: 300px;
+}
+
+aside nav a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  background-color: #5E4CC2;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s ease;
+}
+
+aside nav a:hover {
+  background-color: black;
+}
+
+.icon {
+  font-size: 22px;
+  min-width: 30px;
+  text-align: center;
+}
+
+.label {
+  display: none;
+  margin-left: 15px;
+  white-space: nowrap;
+}
+
+aside.hover-active:hover .label,
+aside.show .label .assignment-box{
+  display: inline;
+}
+/* This will be the new style for the assignment box */
+.assignment-box {
+  margin-left: 60px; /* Default for non-hover-state */
+  transition: margin-left 0.3s ease;
+}
+
+/* When the aside is hovered, adjust the margin of the assignment box */
+aside.hover-active:hover + .assignment-box,
+aside.show + .assignment-box {
+  margin-left: 300px; /* Adjust to sidebar's widened size */
+}
+  /* Assignment Box */
+  .assignment-box {
+    background-color: white;
+    border-radius: 15px;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Left Section */
+  .left-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .back-btn {
+    background: none;
+    border: none; /* Add a visible border */
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 3px;        /* Optional: rounded edges */
+    padding: 3px 8px;
+    width: fit-content;
+    transition: 0.2s ease;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .back-btn:hover {
+    transform: scale(1.05);
+  }
+
+  .back-btn img {
+    width: 30px; /* Adjust the size of the arrow */
+    height: 30px; /* Ensure the image has the correct aspect ratio */
+  }
+
+  .assignment-header {
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 10px;
+    transition: margin-left 0.3s ease;
+  }
+  
+  .assignment-description {
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: margin-left 0.3s ease;
+  }
+  
+  .assignment-description label {
+    font-weight: bold;
+    transition: margin-left 0.3s ease;
+  }
+  
+  .message-box {
+    background-color: #f2f2f2;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+  }
+  
+  /* Right Panel */
+  .right-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    width: 200px;
+    margin-top: 10px;
+    border: 2px solid #999;
+    border-radius: 8px;
+    padding: 10px;
+  }
+  
+  .attach-btn, .attachc-btn,
+  .upload-btn,
+  .submit-btn {
+    width: 100%;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .attachc-btn {
+    border: 2px solid #999;
+  }
+
+  .attach-btn {
+    background-color: #e0e0e0;
+    border: 2px solid #999;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    width: fit-content;
+  }
+  
+  .upload-btn {
+    background-color: #4a4ef5;
+    color: white;
+    transition: 0.2s ease;
+  }
+  
+  .submit-btn {
+    background-color: #2c2f90;
+    color: white;
+    transition: 0.2s ease;
+  }
+  
+  .upload-btn:hover {
+    transform: scale(1.05);    /* Slight zoom effect */
+    
+  }
+  
+  .submit-btn:hover {
+    transform: scale(1.05);    /* Slight zoom effect */
+  }

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500&display=swap" rel="stylesheet">
+  <title>EduQuest</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Fredoka', sans-serif;
+      background-color: #6f62d2;
+    }
+
+    header {
+      background-color: #5E4CC2;
+      padding: 0px 20px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      position:fixed;
+      z-index: 1000;
+    }
+
+    .points {
+      background-color: white;
+      border-radius: 50px;
+      padding: 10px 8px;
+      text-align: center;
+    }
+
+    .menu-btn {
+      background-color: #5E4CC2;
+      color: white;
+      font-size: 25px;
+      border: none;
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: 5px;
+    }
+
+    .join-btn {
+      background-color: #00B894;
+      color: white;
+      font-size: 16px;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-left: auto;
+      text-align: center;
+    }
+
+    .join-btn:hover {
+      background-color: #019174;
+    }
+
+    .logo-btn,
+    .shop-btn {
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+    
+    .acc-btn
+    {
+      border: none;
+      background: none;
+      cursor: pointer;
+      margin-right: 30px;
+    }
+
+    aside {
+      width: 60px;
+      background-color: #2F285B;
+      color: white;
+      padding: 80px 10px;
+      height: 100vh;
+      box-sizing: border-box;
+      position: fixed;
+      left: 0;
+      overflow: hidden;
+      transition: width 0.3s ease;
+      z-index: 1;
+    }
+
+    aside.hover-active:hover,
+    aside.show {
+      width: 300px;
+    }
+
+    aside nav a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      text-decoration: none;
+      color: white;
+      font-size: 18px;
+      background-color: #5E4CC2;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    aside nav a:hover {
+      background-color: black;
+    }
+
+    .icon {
+      font-size: 22px;
+      min-width: 30px;
+      text-align: center;
+    }
+
+    .label {
+      display: none;
+      margin-left: 15px;
+      white-space: nowrap;
+    }
+
+    aside.hover-active:hover .label,
+    aside.show .label {
+      display: inline;
+    }
+
+    /* Style for the quiz section */
+    .quiz-container {
+      margin-left: 60px; /* space for sidebar */
+      padding: 50px 20px;
+    }
+
+    .quiz-title {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: white;
+    }
+
+    .question {
+      margin-bottom: 15px;
+    }
+
+    .question input {
+      width: calc(100% - 22px); /* Adjust for padding */
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      font-family: 'Fredoka', sans-serif;
+    }
+
+    .answers-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+
+    .save-close-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #00B894;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-family: 'Fredoka', sans-serif;
+    }
+
+    .save-close-btn:hover {
+      background-color: #019174;
+      font-family: 'Fredoka', sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <button class="menu-btn" onclick="toggleSidebar()">&#9776;</button>
+    <button class="logo-btn">
+      <a href="student-home.php"><img src="eduquest.png" alt="Eduquest Logo" style="height: 50px; width: auto;"></a>
+    </button>
+    <button class="join-btn">Join Class</button>
+	<span class="points">✨ 0.00</span>
+    <button class="shop-btn">
+      <a href="shop.html"><img src="shopping-cart.png" alt="cart" style="height: 30px; width: auto;"></a>
+    </button>
+    <button class="acc-btn">
+      <a href="account.html"><img src="account.png" alt="profile" style="height: 30px; width: auto;"></a>
+    </button>
+  </header>
+
+  <aside id="sidebar" class="hover-active">
+    <nav>
+      <a href="student-home.php">
+        <span class="icon">🏠</span><span class="label">Home</span>
+      </a>
+      <a href="teacher-task.html">
+        <span class="icon">📝</span><span class="label">Tasks</span>
+      </a>
+      <a href="leaderboards.html">
+        <span class="icon">🏆</span><span class="label">Leaderboard</span>
+      </a>
+      
+    </nav>
+  </aside>
+
+  <div class="quiz-container">
+    <h2 class="quiz-title">CREATE A QUIZ</h2>
+    <div class="question">
+      <input type="text" placeholder="1. Write your question" />
+    </div>
+    <div class="answers-grid">
+        <input type="text" placeholder="Write the answer" />
+        <input type="text" placeholder="Write the answer" />
+        <input type="text" placeholder="Write the answer" />
+        <input type="text" placeholder="Write the answer" />
+      </div>
+      
+    <div class="question">
+      <input type="text" placeholder="2. Write your question" />
+    </div>
+    <div class="answers-grid">
+        <input type="text" placeholder="Write the answer" />
+        <input type="text" placeholder="Write the answer" />
+        <input type="text" placeholder="Write the answer" />
+        <input type="text" placeholder="Write the answer" />
+      </div>
+      
+    <div class="question">
+      <input type="text" placeholder="3. Write your question" />
+    </div>
+    <div class="answers-grid">
+        <input type="text" placeholder="Write the answer" />
+        <input type="text" placeholder="Write the answer" />
+        <input type="text" placeholder="Write the answer" />
+        <input type="text" placeholder="Write the answer" />
+      </div>
+      
+    <div class="question">
+      <input type="text" placeholder="4. Write your question" />
+    </div>
+    <div class="answers-grid">
+        <input type="text" placeholder="Write the answer" />
+        <input type="text" placeholder="Write the answer" />
+        <input type="text" placeholder="Write the answer" />
+        <input type="text" placeholder="Write the answer" />
+      </div>
+      
+    <button class="save-close-btn">SAVE</button>
+    <button class="save-close-btn">CLOSE</button>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('show');
+    }
+
+    
+  </script>
+</body>
+</html>

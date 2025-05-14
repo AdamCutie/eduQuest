@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <title>EduQuest/Classroom</title>
+  <style>
+    header {
+      background-color: #5E4CC2;
+      padding: 0px 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Fredoka', sans-serif;
+      background: radial-gradient(100% 259.2% at 72.65% 0%, #FFF8A7 16%, #FFA973 34%, #A4E8ED 72%);
+    }
+
+    .panel {
+      background-color: #5E4CC2;
+      height: 87vh;
+      margin: 10px 30px;
+      border-radius: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .inner-panel {
+      width: 95%;
+      height: 80vh;
+      background-color: #2F285B;
+      border-radius: 20px;
+      color: white;
+      padding: 30px;
+      box-sizing: border-box;
+      overflow-y: auto;
+    }
+
+    .inner-panel h2 {
+      margin-top: 0;
+      font-size: 36px;
+      color: white;
+      text-shadow:
+        -1px -1px 0 #000,
+         1px -1px 0 #000,
+        -1px  1px 0 #000,
+         1px  1px 0 #000;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      table-layout: auto;
+    }
+
+    th, td {
+      padding: 15px;
+      border-bottom: 1px solid #444;
+      word-wrap: break-word;
+    }
+
+    th {
+      background-color: #3b3461;
+      color: #fff;
+    }
+
+    td {
+      color: #eee;
+    }
+
+    .action-btn {
+      padding: 6px 12px;
+      margin-right: 5px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .edit-btn {
+      background-color: #00b894;
+      color: white;
+    }
+
+    .delete-btn {
+      background-color: #d63031;
+      color: white;
+    }
+
+    .action-btn:hover {
+      opacity: 0.85;
+    }
+
+    .back-btn a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #2F285B;
+      color: white;
+      text-decoration: none;
+      font-size: 20px;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      transition: background-color 0.3s ease;
+    }
+
+    .back-btn a:hover {
+      background-color: #1d1a3d;
+    }
+    .add-class-btn {
+      background-color: #6c5ce7;
+      color: white;
+      font-size: 16px;
+      padding: 10px 18px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .add-class-btn:hover {
+      background-color: #4b42a5;
+    }
+    
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+    
+    .modal-content {
+      background-color: #2F285B;
+      margin: 10% auto;
+      padding: 30px;
+      border-radius: 15px;
+      width: 60%;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      color: white;
+      position: relative;
+    }
+    
+    .close-modal {
+      position: absolute;
+      right: 20px;
+      top: 15px;
+      font-size: 28px;
+      font-weight: bold;
+      color: #aaa;
+      cursor: pointer;
+    }
+    
+    .close-modal:hover {
+      color: white;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+    
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #524b8c;
+      background-color: #3b3461;
+      color: white;
+      font-family: 'Fredoka', sans-serif;
+    }
+    
+    .form-group select {
+      height: 42px;
+    }
+    
+    .modal-footer {
+      margin-top: 30px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+    
+    .cancel-btn {
+      background-color: #7c7c7c;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    
+    .submit-btn {
+      background-color: #00b894;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    
+    .submit-btn:hover {
+      background-color: #00d1a7;
+    }
+    
+    .cancel-btn:hover {
+      background-color: #999;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="back-btn">
+      <a href="admin-home.html" title="Back to Home">
+        <i class="fas fa-arrow-left"></i>
+      </a>
+    </div>
+    <div>
+      <a href="admin-home.html">
+        <img src="eduquest.png" alt="Eduquest Logo" style="height: 60px; width: auto;">
+      </a>
+    </div>
+  </header>
+
+  <div class="panel">
+    <div class="inner-panel">
+      <h2>ADMINS</h2><div style="margin-bottom: 20px;">
+        <button class="action-btn add-class-btn" id="addAdminBtn">
+          <i class="fas fa-plus"></i> Add Admin
+        </button>
+      </div>      
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th class="actions-column">Actions</th>
+        </tr>
+        <tr><td>Borat</td><td>borat@gmail.com</td><td><button class="action-btn edit-btn">Edit</button><button class="action-btn delete-btn">Delete</button></td></tr>
+        <tr><td>John</td><td>john.doe@gmail.com</td><td><button class="action-btn edit-btn">Edit</button><button class="action-btn delete-btn">Delete</button></td></tr>
+        <tr><td>Alice</td><td>alice@example.com</td><td><button class="action-btn edit-btn">Edit</button><button class="action-btn delete-btn">Delete</button></td></tr>
+        <tr><td>Bob</td><td>bob@example.com</td><td><button class="action-btn edit-btn">Edit</button><button class="action-btn delete-btn">Delete</button></td></tr>
+        <tr><td>Charlie</td><td>charlie@example.com</td><td><button class="action-btn edit-btn">Edit</button><button class="action-btn delete-btn">Delete</button></td></tr>
+        <tr><td>David</td><td>david@example.com</td><td><button class="action-btn edit-btn">Edit</button><button class="action-btn delete-btn">Delete</button></td></tr>
+        <tr><td>Eva</td><td>eva@example.com</td><td><button class="action-btn edit-btn">Edit</button><button class="action-btn delete-btn">Delete</button></td></tr>
+        <tr><td>Frank</td><td>frank@example.com</td><td><button class="action-btn edit-btn">Edit</button><button class="action-btn delete-btn">Delete</button></td></tr>
+        <tr><td>Grace</td><td>grace@example.com</td><td><button class="action-btn edit-btn">Edit</button><button class="action-btn delete-btn">Delete</button></td></tr>
+        <tr><td>Henry</td><td>henry@example.com</td><td><button class="action-btn edit-btn">Edit</button><button class="action-btn delete-btn">Delete</button></td></tr>
+        <tr><td>Ivy</td><td>ivy@example.com</td><td><button class="action-btn edit-btn">Edit</button><button class="action-btn delete-btn">Delete</button></td></tr>
+        <tr><td>Jack</td><td>jack@example.com</td><td><button class="action-btn edit-btn">Edit</button><button class="action-btn delete-btn">Delete</button></td></tr>
+        <tr><td>Kate</td><td>kate@example.com</td><td><button class="action-btn edit-btn">Edit</button><button class="action-btn delete-btn">Delete</button></td></tr>
+        <tr><td>Leo</td><td>leo@example.com</td><td><button class="action-btn edit-btn">Edit</button><button class="action-btn delete-btn">Delete</button></td></tr>
+        <tr><td>Mia</td><td>mia@example.com</td><td><button class="action-btn edit-btn">Edit</button><button class="action-btn delete-btn">Delete</button></td></tr>
+        <tr><td>Noah</td><td>noah@example.com</td><td><button class="action-btn edit-btn">Edit</button><button class="action-btn delete-btn">Delete</button></td></tr>
+        <tr><td>Olivia</td><td>olivia@example.com</td><td><button class="action-btn edit-btn">Edit</button><button class="action-btn delete-btn">Delete</button></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div id="addAdminModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal()">&times;</span>
+      <h2>Add New Admin</h2>
+      <form id="addAdminForm">
+        <div class="form-group">
+          <label for="adminName">Name:</label>
+          <input type="text" id="adminName" name="adminName" placeholder="Enter admin name" required>
+        </div>
+        <div class="form-group">
+          <label for="adminEmail">Email:</label>
+          <input type="email" id="adminEmail" name="adminEmail" placeholder="Enter email address" required>
+        </div>
+        <div class="form-group">
+          <label for="adminPassword">Password:</label>
+          <input type="password" id="adminPassword" name="adminPassword" placeholder="Enter password" required>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password:</label>
+          <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" required>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="cancel-btn" onclick="closeModal()">Cancel</button>
+          <button type="submit" class="submit-btn">Add Admin</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Modal functionality
+    const modal = document.getElementById("addAdminModal");
+    const addAdminBtn = document.getElementById("addAdminBtn");
+    
+    // Open modal when Add Admin button is clicked
+    addAdminBtn.addEventListener("click", function() {
+      modal.style.display = "block";
+    });
+    
+    function closeModal() {
+      modal.style.display = "none";
+    }
+    
+    // Close modal when clicking outside of it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        closeModal();
+      }
+    }
+    
+    // Form submission
+    document.getElementById("addAdminForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      
+      // Get form values
+      const adminName = document.getElementById("adminName").value;
+      const adminEmail = document.getElementById("adminEmail").value;
+      const adminPassword = document.getElementById("adminPassword").value;
+      const confirmPassword = document.getElementById("confirmPassword").value;
+      
+      // Validate passwords match
+      if (adminPassword !== confirmPassword) {
+        alert("Passwords do not match!");
+        return;
+      }
+      
+      // Here you would typically send the data to your backend
+      console.log("Admin created:", {
+        name: adminName,
+        email: adminEmail,
+        password: adminPassword
+      });
+      
+      // Success message
+      alert("Admin successfully added!");
+      
+      // Reset form and close modal
+      this.reset();
+      closeModal();
+      
+      // Optionally, you could refresh the table with the new admin
+      // This would require a proper backend implementation
+      // For demonstration, you could add it to the table directly:
+      /*
+      const table = document.querySelector("table");
+      const newRow = table.insertRow(-1);
+      
+      const nameCell = newRow.insertCell(0);
+      const emailCell = newRow.insertCell(1);
+      const actionsCell = newRow.insertCell(2);
+      
+      nameCell.textContent = adminName;
+      emailCell.textContent = adminEmail;
+      actionsCell.innerHTML = '<button class="action-btn edit-btn">Edit</button><button class="action-btn delete-btn">Delete</button>';
+      */
+    });
+    
+    // Add event listeners for the Edit and Delete buttons
+    document.querySelectorAll(".edit-btn").forEach(button => {
+      button.addEventListener("click", function() {
+        const row = this.closest("tr");
+        const name = row.cells[0].textContent;
+        const email = row.cells[1].textContent;
+        
+        alert(`Edit admin: ${name} (${email})`);
+        // You would typically open a modal with the admin's data pre-filled
+      });
+    });
+    
+    document.querySelectorAll(".delete-btn").forEach(button => {
+      button.addEventListener("click", function() {
+        const row = this.closest("tr");
+        const name = row.cells[0].textContent;
+        
+        if (confirm(`Are you sure you want to delete admin ${name}?`)) {
+          // Here you would typically send a delete request to the backend
+          // For demonstration, just remove the row
+          row.remove();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

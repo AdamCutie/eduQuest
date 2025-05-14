@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EduQuest</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+
+    header {
+      background-color: #5E4CC2;
+      padding: 0px 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+	
+	.points{
+	  background-color: white;
+	  border-radius: 50px;
+	  padding:12px;
+	  text-align: center;
+	}
+
+    .menu-btn {
+      background-color: #5E4CC2;
+      color: white;
+      font-size: 25px;
+      border: none;
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: 5px;
+    }
+
+    .join-btn {
+      background-color: #00B894;
+      color: white;
+      font-size: 16px;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-left: auto;
+      text-align: center;
+    }
+
+    .join-btn:hover {
+      background-color: #019174;
+    }
+
+    .shop-btn,
+    .logo-btn,
+    .acc-btn {
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+
+    aside {
+      width: 60px;
+      background-color: #2F285B;
+      color: white;
+      padding: 15px 10px;
+      height: 100vh;
+      box-sizing: border-box;
+      position: fixed;
+      left: 0;
+      overflow: hidden;
+      transition: width 0.3s ease;
+      z-index: 1;
+    }
+
+    aside.hover-active:hover,
+    aside.show {
+      width: 300px;
+    }
+
+    aside nav a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      text-decoration: none;
+      color: white;
+      font-size: 18px;
+      background-color: #5E4CC2;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    aside nav a:hover {
+      background-color: black;
+    }
+
+    .icon {
+      font-size: 22px;
+      min-width: 30px;
+      text-align: center;
+    }
+
+    .label {
+      display: none;
+      margin-left: 15px;
+      white-space: nowrap;
+    }
+
+    aside.hover-active:hover .label,
+    aside.show .label {
+      display: inline;
+    }
+
+    .shop-wrapper {
+  margin-left: 60px;
+  padding: 20px;
+  background: #6f62d2;
+  min-height: 86.1vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+aside.show ~ .shop-wrapper {
+  margin-left: 300px;
+}
+
+.shop-container {
+  width: 90%;
+  max-width: 800px; /* make the shop narrower */
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: 15px;
+  color: white;
+}
+
+.shop-title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  display: inline-block;
+  background-color: #1f1a3a;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.shop-section h3 {
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #fff;
+  text-align: center;
+  border-radius: 10px;
+  display: inline-block;
+  background-color: #1f1a3a;
+  padding: 5px 5px;
+}
+
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, auto));
+  gap: 70px;
+  align-items: center; /* centers items vertically within grid cells */
+  justify-content: center; /* 💡 this centers the grid itself horizontally */
+}
+
+
+.shop-item {
+  background-color: #1f1a3a;
+  border-radius: 6px;
+  padding: 5px;
+  text-align: center;
+}
+
+.item-img {
+  background-color: black;
+  width: 100%;
+  height: 60px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.shop-item button {
+  background-color: #5E4CC2;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: bold;
+  transition: 0.2s ease;
+}
+
+.shop-item button:hover {
+  background-color: #3e328a;
+  transform: scale(1.05);
+}
+
+	</style>
+</head>
+<body>
+  <header>
+    <button class="menu-btn" onclick="toggleSidebar()">&#9776;</button>
+    <button class="logo-btn">
+      <a href="student-home.php"><img src="eduquest.png" alt="Eduquest Logo" style="height: 70px; width: auto;"></a>
+    </button>
+    <button class="join-btn">Join Class</button>
+	<span class="points">✨ 0.00</span>
+    <button class="shop-btn">
+      <a href="shop.html"><img src="shopping-cart.png" alt="cart" style="height: 40px; width: auto;"></a>
+    </button>
+    <button class="acc-btn">
+      <a href="account.html"><img src="account.png" alt="profile" style="height: 40px; width: auto;"></a>
+    </button>
+  </header>
+
+  <aside id="sidebar" class="hover-active">
+    <nav>
+      <a href="student-home.php">
+        <span class="icon">🏠</span><span class="label">Home</span>
+      </a>
+      <a href="student-task.html">
+        <span class="icon">📝</span><span class="label">Tasks</span>
+      </a>
+      <a href="leaderboards.html">
+        <span class="icon">🏆</span><span class="label">Leaderboard</span>
+      </a>
+     
+    </nav>
+  </aside>
+
+  <div class="shop-wrapper">
+    <main class="shop-container">
+      <h2 class="shop-title">POINTS SHOP</h2>
+  
+      <div class="shop-section">
+        <h3>Avatars</h3>
+        <div class="shop-grid">
+          <div class="shop-item"><div class="item-img"></div><button>100</button></div>
+          <div class="shop-item"><div class="item-img"></div><button>150</button></div>
+          <div class="shop-item"><div class="item-img"></div><button>200</button></div>
+          <div class="shop-item"><div class="item-img"></div><button>250</button></div>
+          <div class="shop-item"><div class="item-img"></div><button>300</button></div>
+        </div>
+      </div>
+  
+      <div class="shop-section">
+        <h3>Borders</h3>
+        <div class="shop-grid">
+          <div class="shop-item"><div class="item-img"></div><button>100</button></div>
+          <div class="shop-item"><div class="item-img"></div><button>150</button></div>
+          <div class="shop-item"><div class="item-img"></div><button>200</button></div>
+          <div class="shop-item"><div class="item-img"></div><button>250</button></div>
+          <div class="shop-item"><div class="item-img"></div><button>300</button></div>
+        </div>
+      </div>
+  
+      <div class="shop-section">
+        <h3>Backgrounds</h3>
+        <div class="shop-grid">
+          <div class="shop-item"><div class="item-img"></div><button>100</button></div>
+          <div class="shop-item"><div class="item-img"></div><button>150</button></div>
+          <div class="shop-item"><div class="item-img"></div><button>200</button></div>
+          <div class="shop-item"><div class="item-img"></div><button>250</button></div>
+          <div class="shop-item"><div class="item-img"></div><button>300</button></div>
+        </div>
+      </div>
+    </main>
+  </div>
+  
+  
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('show');
+    }
+  </script>
+</body>
+</html>

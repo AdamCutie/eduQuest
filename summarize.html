@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EduQuest</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #6f62d2;
+    }
+
+    header {
+      background-color: #5E4CC2;
+      padding: 0px 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+	
+	.points{
+	  background-color: white;
+	  border-radius: 50px;
+	  padding:12px;
+	  text-align: center;
+	}
+
+    .menu-btn {
+      background-color: #5E4CC2;
+      color: white;
+      font-size: 25px;
+      border: none;
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: 5px;
+    }
+
+    .join-btn {
+      background-color: #00B894;
+      color: white;
+      font-size: 16px;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-left: auto;
+      text-align: center;
+    }
+
+    .join-btn:hover {
+      background-color: #019174;
+    }
+
+    .shop-btn,
+    .logo-btn,
+    .acc-btn {
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+
+    aside {
+      width: 60px;
+      background-color: #2F285B;
+      color: white;
+      padding: 15px 10px;
+      height: 100vh;
+      box-sizing: border-box;
+      position: fixed;
+      left: 0;
+      overflow: hidden;
+      transition: width 0.3s ease;
+      z-index: 1;
+    }
+
+    aside.hover-active:hover,
+    aside.show {
+      width: 300px;
+    }
+
+    aside nav a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      text-decoration: none;
+      color: white;
+      font-size: 18px;
+      background-color: #5E4CC2;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    aside nav a:hover {
+      background-color: black;
+    }
+
+    .icon {
+      font-size: 22px;
+      min-width: 30px;
+      text-align: center;
+    }
+
+    .label {
+      display: none;
+      margin-left: 15px;
+      white-space: nowrap;
+    }
+
+    aside.hover-active:hover .label,
+    aside.show .label {
+      display: inline;
+    }
+
+    main {
+  margin-left: 60px;
+  padding: 30px 20px;
+  margin-top: 10px;
+  transition: margin-left 0.3s ease; /* Add smooth animation */
+}
+
+aside.hover-active:hover ~ main,
+aside.show ~ main {
+  margin-left: 300px;
+}
+
+
+.task-container {
+  background: #5E4CC2;
+  padding: 20px;
+  border-radius: 15px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.back-btn img {
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  display: block;
+}
+
+.back-btn:hover {
+      transform: scale(1.05);
+    }
+
+.task-header {
+  margin-top: 10px;
+}
+
+.attach-btn {
+  padding: 10px 20px;
+  border-radius: 10px;
+  background: #fff;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.points-text {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.summary-textarea {
+  width: 100%;
+  height: 200px;
+  margin-top: 15px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  resize: none;
+  box-sizing: border-box;
+}
+
+.submit-btn {
+  margin-top: 15px;
+  background: #5E4CC2;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+	</style>
+</head>
+<body>
+  <header>
+    <button class="menu-btn" onclick="toggleSidebar()">&#9776;</button>
+    <button class="logo-btn">
+      <a href="student-home.php"><img src="eduquest.png" alt="Eduquest Logo" style="height: 70px; width: auto;"></a>
+    </button>
+    <button class="join-btn">Join Class</button>
+	<span class="points">✨ 0.00</span>
+    <button class="shop-btn">
+      <a href="shop.html"><img src="shopping-cart.png" alt="cart" style="height: 40px; width: auto;"></a>
+    </button>
+    <button class="acc-btn">
+      <a href="account.html"><img src="account.png" alt="profile" style="height: 40px; width: auto;"></a>
+    </button>
+  </header>
+
+  <aside id="sidebar" class="hover-active">
+    <nav>
+      <a href="student-home.php">
+        <span class="icon">🏠</span><span class="label">Home</span>
+      </a>
+      <a href="student-task.html">
+        <span class="icon">📝</span><span class="label">Tasks</span>
+      </a>
+      <a href="leaderboards.php">
+        <span class="icon">🏆</span><span class="label">Leaderboard</span>
+      </a>
+      <a href="archive-class.html">
+        <span class="icon">🏆</span><span class="label">Archive Class</span>
+      </a>      
+    </nav>
+  </aside>
+
+  <main>
+    <div class="task-container">
+      <button class="back-btn" onclick="window.location.href='student-alltopics.php'"><img src="back-button.png" alt="back_arrow"></button>
+      <div class="task-header">
+        <button class="attach-btn">Attach File</button>
+        <div class="points-text">Points: 50</div>
+      </div>
+      <textarea class="summary-textarea" placeholder="Summarize the lesson"></textarea>
+      <button class="submit-btn">Submit</button>
+    </div>
+  </main>
+
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('show');
+    }
+  </script>
+</body>
+</html>

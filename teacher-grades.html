@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="EduQuest - Classroom management and learning platform for teachers">
+  <title>EduQuest</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #5E4CC2;
+      --secondary-color: #2F285B;
+      --accent-color: #00B894;
+      --text-color: #333;
+      --light-bg: #f4f4f4;
+      --blue-accent: #3c98ff;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: #6f62d2;
+      color: var(--text-color);
+    }
+
+    header {
+      background-color: var(--primary-color);
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .menu-btn {
+      background-color: var(--primary-color);
+      color: white;
+      font-size: 25px;
+      border: none;
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: 5px;
+    }
+
+    .logo-btn, .acc-btn {
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+
+    .acc-btn {
+      margin-left: auto;
+    }
+
+    aside {
+      width: 60px;
+      background-color: var(--secondary-color);
+      color: white;
+      padding: 15px 10px;
+      height: 100vh;
+      box-sizing: border-box;
+      position: fixed;
+      left: 0;
+      overflow: hidden;
+      transition: width 0.3s ease;
+      z-index: 1;
+    }
+
+    aside.hover-active:hover,
+    aside.show {
+      width: 300px;
+    }
+
+    aside nav a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      text-decoration: none;
+      color: white;
+      font-size: 18px;
+      background-color: var(--primary-color);
+      border-radius: 8px;
+      margin-bottom: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    aside nav a:hover {
+      background-color: black;
+    }
+
+    .icon {
+      font-size: 22px;
+      min-width: 30px;
+      text-align: center;
+    }
+
+    .label {
+      display: none;
+      margin-left: 15px;
+      white-space: nowrap;
+    }
+
+    aside.hover-active:hover .label,
+    aside.show .label {
+      display: inline;
+    }
+
+    .subject-box {
+      background: white;
+      border-radius: 15px;
+      padding: 1rem;
+      margin-left: 80px;
+      margin-right: 20px;
+      margin-top: 20px;
+      transition: margin-left 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    aside.hover-active:hover ~ .subject-box,
+    aside.show ~ .subject-box {
+      margin-left: 320px;
+    }
+
+    .subject-header {
+      background: var(--blue-accent);
+      color: white;
+      padding: 1rem;
+      border-radius: 12px 12px 0 0;
+      margin: -1rem -1rem 1rem -1rem;
+    }
+
+    .subject-header h2 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    .subject-header p {
+      margin: 0.25rem 0 0;
+      font-size: 1rem;
+    }
+
+    .filters {
+      margin: 1rem 0;
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .filter-btn {
+      padding: 0.5rem 1rem;
+      background-color: white;
+      color: black;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+
+    .filter-btn:hover {
+      background-color: #e0e0e0;
+      border-color: #bbb;
+    }
+
+    .main-content {
+      flex-grow: 1;
+      padding: 1rem;
+      background: white;
+      border-radius: 8px;
+    }
+
+    .grades-table {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    .grades-table table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    .grades-table th {
+      background-color: var(--light-bg);
+      padding: 12px 15px;
+      text-align: left;
+      font-weight: bold;
+      border-bottom: 2px solid #ddd;
+    }
+
+    .grades-table td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .grades-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .grades-table tr:hover {
+      background-color: rgba(0,0,0,0.02);
+    }
+
+    @media (max-width: 768px) {
+      aside {
+        width: 60px;
+      }
+      aside.show {
+        width: 200px;
+      }
+      .subject-box {
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-top: 80px;
+      }
+      aside.show ~ .subject-box {
+        margin-left: 220px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <button class="menu-btn" onclick="toggleSidebar()" aria-label="Toggle sidebar" aria-expanded="false" aria-controls="sidebar">&#9776;</button>
+    <button class="logo-btn">
+      <a href="teacher-home.html"><img src="eduquest.png" alt="EduQuest Logo" width="70" height="70"></a>
+    </button>
+    <button class="acc-btn">
+      <a href="account.html"><img src="account.png" alt="User profile" width="40" height="40"></a>
+    </button>
+  </header>
+
+  <aside id="sidebar" class="hover-active">
+    <nav>
+      <a href="teacher-home.html">
+        <span class="icon">🏠</span><span class="label">Home</span>
+      </a>
+      <a href="teacher-task.html">
+        <span class="icon">📝</span><span class="label">Tasks</span>
+      </a>
+      <a href="teacher-leadboard.html">
+        <span class="icon">🏆</span><span class="label">Leaderboard</span>
+      </a>
+    </nav>
+  </aside>
+
+  <section class="subject-box" aria-labelledby="subject-title">
+    <div class="subject-header">
+      <div>
+        <h2 id="subject-title">Subject Name</h2>
+        <p id="subject-section">Section</p>
+      </div>
+    </div>
+    
+    <div class="filters">
+      <button class="filter-btn" onclick="window.location.href='teacher-alltopics.html'">All Topics</button>
+      <button class="filter-btn" onclick="window.location.href='teacher-act.html'">Activities</button>
+      <button class="filter-btn" onclick="window.location.href='teacher-People.html'">People</button>
+      <button class="filter-btn" onclick="window.location.href='teacher-grades.html'">Grades</button>
+    </div>
+
+    <div class="main-content">      
+      <div class="grades-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Student</th>
+              <th>Activity Name <button class="filter-btn">View</button></th>
+              <th>Quiz</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>● Fullname</td>
+              <td>__/100</td>
+              <td>10/20</td>
+            </tr>
+            <tr>
+              <td>● Fullname</td>
+              <td>Missing</td>
+              <td>Missing</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const btn = document.querySelector('.menu-btn');
+      const isShown = sidebar.classList.toggle('show');
+      btn.setAttribute('aria-expanded', isShown);
+    }
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(event) {
+      if (!event.target.matches('.filter-btn')) {
+        const dropdowns = document.querySelectorAll('.dropdown-content');
+        dropdowns.forEach(dropdown => {
+          dropdown.style.display = 'none';
+        });
+      }
+    });
+  </script>
+</body>
+</html>

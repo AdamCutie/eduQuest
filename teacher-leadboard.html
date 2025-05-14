@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500&display=swap" rel="stylesheet">
+  <title>EduQuest</title>
+  <style>
+    :root {
+      --primary-color: #5E4CC2;
+      --secondary-color: #2F285B;
+      --accent-color: #00B894;
+      --text-color: #333;
+      --light-bg: #f4f4f4;
+      --card-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+      --card-hover-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: #6f62d2;
+      color: var(--text-color);
+    }
+
+    header {
+      background-color: var(--primary-color);
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .menu-btn {
+      background-color: var(--primary-color);
+      color: white;
+      font-size: 25px;
+      border: none;
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: 5px;
+    }
+
+    .logo-btn,
+    .acc-btn {
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+
+    .acc-btn {
+      margin-left: auto;
+    }
+
+    aside {
+      width: 60px;
+      background-color: var(--secondary-color);
+      color: white;
+      padding: 15px 10px;
+      height: 100vh;
+      box-sizing: border-box;
+      position: fixed;
+      left: 0;
+      overflow: hidden;
+      transition: width 0.3s ease;
+      z-index: 1;
+    }
+
+    aside.hover-active:hover,
+    aside.show {
+      width: 300px;
+    }
+
+    aside nav a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      text-decoration: none;
+      color: white;
+      font-size: 18px;
+      background-color: var(--primary-color);
+      border-radius: 8px;
+      margin-bottom: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    aside nav a:hover {
+      background-color: black;
+    }
+
+    .icon {
+      font-size: 22px;
+      min-width: 30px;
+      text-align: center;
+    }
+
+    .label {
+      display: none;
+      margin-left: 15px;
+      white-space: nowrap;
+      text-align: center;
+    }
+
+    aside.hover-active:hover .label,
+    aside.show .label {
+      display: inline;
+    }
+
+    .panel {
+      max-width: 1200px;
+      margin: 10px auto;
+      background-color: #5E4CC2;
+      border-radius: 15px;
+      padding: 1rem;
+      margin-left: 80px;
+      margin-right: 20px;
+      margin-top: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: margin-left 0.3s ease;
+    }
+
+    aside.hover-active:hover ~ .panel,
+    aside.show ~ .panel {
+      margin-left: 320px;
+    }
+
+    .title {
+      text-align: center;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 500;
+      color: white;
+      margin-top: 30px;
+      text-shadow: 0 0 8px rgba(255, 255, 255, 1);
+    }
+
+    .leaderboad-panel {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 15px;
+      padding: 30px;
+    }
+
+    .leader-card {
+      background-color: rgba(255, 255, 255, 0.15);
+      padding: 20px;
+      border-radius: 15px;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 1.1rem;
+      transition: transform 0.2s ease;
+    }
+
+    .leader-card:hover {
+      transform: scale(1.03);
+      background-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .rank {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-right: 15px;
+    }
+
+    .name {
+      flex: 1;
+    }
+
+    .score {
+      font-weight: bold;
+      color: #FFD700;
+    }
+
+    
+  </style>
+</head>
+<body>
+  <header>
+    <button class="menu-btn" onclick="toggleSidebar()" aria-label="Toggle sidebar" aria-expanded="false" aria-controls="sidebar">&#9776;</button>
+    <button class="logo-btn">
+      <a href="teacher-home.php"><img src="eduquest.png" alt="EduQuest Logo" width="70" height="70" style="height: auto;"></a>
+    </button>
+    <button class="acc-btn">
+      <a href="account.html"><img src="account.png" alt="User profile" width="40" height="40" style="height: auto;"></a>
+    </button>
+  </header>
+
+  <aside id="sidebar" class="hover-active">
+    <nav>
+      <a href="teacher-home.php">
+        <span class="icon">🏠</span><span class="label">Home</span>
+      </a>
+      <a href="teacher-task.html">
+        <span class="icon">📝</span><span class="label">Tasks</span>
+      </a>
+      <a href="teacher-leadboard.html">
+        <span class="icon">🏆</span><span class="label">Leaderboard</span>
+      </a>
+    </nav>
+  </aside>
+
+  <div class="panel">
+    <h1 class="title">LEADERBOARD</h1>
+    <div class="leaderboad-panel">
+      <div class="leader-card">
+        <span class="rank">1</span>
+        <span class="name">Alex Johnson</span>
+        <span class="score">980 pts</span>
+      </div>
+      <div class="leader-card">
+        <span class="rank">2</span>
+        <span class="name">Bianca Cruz</span>
+        <span class="score">920 pts</span>
+      </div>
+      <div class="leader-card">
+        <span class="rank">3</span>
+        <span class="name">Chris Evans</span>
+        <span class="score">870 pts</span>
+      </div>
+      <div class="leader-card">
+        <span class="rank">4</span>
+        <span class="name">Danielle Reyes</span>
+        <span class="score">830 pts</span>
+      </div>
+      <div class="leader-card">
+        <span class="rank">5</span>
+        <span class="name">Ethan Lee</span>
+        <span class="score">800 pts</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const btn = document.querySelector('.menu-btn');
+      const isShown = sidebar.classList.toggle('show');
+      btn.setAttribute('aria-expanded', isShown);
+    }
+  </script>
+</body>
+</html>

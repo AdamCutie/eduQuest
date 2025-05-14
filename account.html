@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+      <!-- Account Modal -->
+  <div class="account" id="accountModal">
+    <div class="account-backdrop" id="modalBackdrop"></div>
+
+    <div class="account-modal-content">
+      <div class="account-header">
+        <img src="account.png" alt="User profile" width="50" height="50" style="height: auto;">
+        <div class="account-header-content">
+          <h3>Torio, Vincent</h3>
+          <p>vincenttorio262@gmail.com</p>
+        </div>
+      </div>
+
+      <div class="account-content">
+        <div class="modal-item" onclick="window.location.href='profile.html'">
+          <i>👤</i><span>Teacher Profile</span>
+        </div>
+        <div class="modal-item" onclick="window.location.href='change-password.html'">
+          <i>🔒</i><span>Account Settings</span>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <div class="logout-btn" id="logoutBtn">Log Out</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
