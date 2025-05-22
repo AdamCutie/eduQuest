@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500&display=swap" rel="stylesheet">
+  <title>EduQuest - Reports</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Fredoka', sans-serif;
+      background-color: #f4f4f4;
+    }
+
+    header {
+      background-color: #5E4CC2;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .menu-btn {
+      background-color: #5E4CC2;
+      color: white;
+      font-size: 25px;
+      border: none;
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: 5px;
+    }
+
+    .join-btn {
+      background-color: #00B894;
+      color: white;
+      font-size: 16px;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      margin-left: auto;
+      transition: background-color 0.3s ease;
+    }
+
+    .join-btn:hover {
+      background-color: #019174;
+    }
+
+    .logo-btn,
+    .acc-btn {
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+
+    aside {
+      width: 60px;
+      background-color: #2F285B;
+      color: white;
+      padding: 15px 10px;
+      height: 100vh;
+      box-sizing: border-box;
+      position: fixed;
+      left: 0;
+      transition: width 0.3s ease;
+      z-index: 1;
+    }
+
+    aside.hover-active:hover,
+    aside.show {
+      width: 300px;
+    }
+
+    aside nav a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      text-decoration: none;
+      color: white;
+      font-size: 18px;
+      background-color: #5E4CC2;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    aside nav a:hover {
+      background-color: black;
+    }
+
+    .icon {
+      font-size: 22px;
+      min-width: 30px;
+      text-align: center;
+    }
+
+    .label {
+      display: none;
+      margin-left: 15px;
+      white-space: nowrap;
+    }
+
+    aside.hover-active:hover .label,
+    aside.show .label {
+      display: inline;
+    }
+
+    .panel {
+      margin-left: 80px;
+      padding: 20px;
+      transition: margin-left 0.3s ease;
+      background-color: #fff;
+      min-height: 100vh;
+    }
+
+    aside.hover-active:hover ~ .panel,
+    aside.show ~ .panel {
+      margin-left: 310px;
+    }
+
+    h1 {
+      color: #5E4CC2;
+    }
+
+    .class-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .class-item {
+      background-color: #eee;
+      padding: 15px;
+      border-radius: 10px;
+      cursor: pointer;
+      text-align: center;
+      transition: background-color 0.2s ease;
+    }
+
+    .class-item:hover {
+      background-color: #dcdcdc;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #5E4CC2;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    .export-btn {
+      background-color: #00B894;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 25px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+
+    .export-btn:hover {
+      background-color: #019174;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <button class="menu-btn" onclick="toggleSidebar()">&#9776;</button>
+    <button class="logo-btn">
+      <a href="home.html"><img src="eduquest.png" alt="Eduquest Logo" style="height: 70px; width: auto;"></a>
+    </button>
+    <button class="join-btn">Join Class</button>
+    <button class="acc-btn">
+      <a href="account.html"><img src="account.png" alt="profile" style="height: 40px; width: auto;"></a>
+    </button>
+  </header>
+
+  <aside id="sidebar" class="hover-active">
+    <nav>
+      <a href="teacher-home.html"><span class="icon">🏠</span><span class="label">Home</span></a>
+      <a href="teacher-task.html"><span class="icon">📝</span><span class="label">Create Tasks</span></a>
+      <a href="leaderboards.html"><span class="icon">🏆</span><span class="label">Leaderboard</span></a>
+      <a href="settings.html"><span class="icon">⚙️</span><span class="label">Settings</span></a>
+      <a href="reports.html"><span class="icon">📊</span><span class="label">Reports</span></a>
+    </nav>
+  </aside>
+
+  <div class="panel">
+    <h1 id="report-title">Select a Class</h1>
+    <div id="classList" class="class-list"></div>
+
+    <div id="gradeReport" class="hidden">
+      <table id="grades-table">
+        <thead>
+          <tr>
+            <th>Student Name</th>
+            <th>Student ID</th>
+            <th>Grade</th>
+          </tr>
+        </thead>
+        <tbody id="grades-body"></tbody>
+      </table>
+      <button class="export-btn" onclick="exportToExcel()">Export to Excel</button>
+    </div>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('show');
+    }
+
+    // Placeholder API call to get teacher's classes
+    async function loadClasses() {
+      try {
+        const response = await fetch('/api/teacher/classes'); // <-- change to your API
+        const classes = await response.json();
+
+        const classList = document.getElementById('classList');
+        classList.innerHTML = '';
+
+        classes.forEach(cls => {
+          const div = document.createElement('div');
+          div.className = 'class-item';
+          div.textContent = cls.name;
+          div.onclick = () => loadGrades(cls.id, cls.name);
+          classList.appendChild(div);
+        });
+      } catch (error) {
+        console.error('Error loading classes:', error);
+      }
+    }
+
+    // Placeholder API call to get students in selected class
+    async function loadGrades(classId, className) {
+      document.getElementById('report-title').textContent = `Grade Report - ${className}`;
+      document.getElementById('gradeReport').classList.remove('hidden');
+
+      try {
+        const response = await fetch(`/api/class/${classId}/grades`); // <-- change to your API
+        const grades = await response.json();
+
+        const tbody = document.getElementById('grades-body');
+        tbody.innerHTML = '';
+
+        grades.forEach(student => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${student.name}</td>
+            <td>${student.id}</td>
+            <td>${student.grade}</td>
+          `;
+          tbody.appendChild(row);
+        });
+      } catch (error) {
+        console.error('Error loading grades:', error);
+      }
+    }
+
+    function exportToExcel() {
+      const table = document.getElementById('grades-table');
+      const wb = XLSX.utils.table_to_book(table, { sheet: "Grades" });
+      XLSX.writeFile(wb, "Grade_Report.xlsx");
+    }
+
+    loadClasses();
+  </script>
+</body>
+</html>

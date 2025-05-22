@@ -398,8 +398,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['class_code'])) {
       <a href="shop.html"><img src="shopping-cart.png" alt="cart" style="height: 40px; width: auto;"></a>
     </button>
     <button class="acc-btn">
-      <a href="student-account.php"><img src="account.png" alt="User profile" width="40" height="40"
-          style="height: auto;"></a>
+      <a href="account.php"><img src="account.png" alt="User profile" width="40" height="40" style="height: auto;"></a>
     </button>
   </header>
 
@@ -411,11 +410,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['class_code'])) {
       <a href="student-task.html">
         <span class="icon">📝</span><span class="label">Tasks</span>
       </a>
-      <a href="leaderboards.php">
+      <a href="leaderboards(bago).html">
         <span class="icon">🏆</span><span class="label">Leaderboard</span>
       </a>
       <a href="archive-class.html">
-        <span class="icon">🏆</span><span class="label">Archive Class</span>
+        <span class="icon">🗃️</span><span class="label">Archive Class</span>
       </a>
 
     </nav>

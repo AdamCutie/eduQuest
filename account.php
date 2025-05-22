@@ -387,7 +387,7 @@
   <header>
     <button class="menu-btn" onclick="toggleSidebar()">&#9776;</button>
     <button class="logo-btn">
-      <a href="home.html"><img src="eduquest.png" alt="Eduquest Logo" style="height: 70px; width: auto;"></a>
+      <a href="eduquest.html"><img src="eduquest.png" alt="Eduquest Logo" style="height: 70px; width: auto;"></a>
     </button>
     <button class="join-btn">Join Class</button>
     <span class="points">✨ 0.00</span>
@@ -401,7 +401,7 @@
 
   <aside id="sidebar" class="hover-active">
     <nav>
-      <a href="home.html">
+      <a href="student-home.php">
         <span class="icon">🏠</span><span class="label">Home</span>
       </a>
       <a href="teacher-task.html">
@@ -410,8 +410,8 @@
       <a href="leaderboards.html">
         <span class="icon">🏆</span><span class="label">Leaderboard</span>
       </a>
-      <a href="settings.html">
-        <span class="icon">⚙️</span><span class="label">Settings</span>
+      <a href="archive-class.html">
+        <span class="icon">🏆</span><span class="label">Archive Class</span>
       </a>
     </nav>
   </aside>

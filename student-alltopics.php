@@ -336,11 +336,11 @@ $stmt->close();
       <a href="student-tasks.html">
         <span class="icon">📝</span><span class="label">Tasks</span>
       </a>
-      <a href="leaderboards.html">
+      <a href="leaderboards(bago).html">
         <span class="icon">🏆</span><span class="label">Leaderboard</span>
       </a>
       <a href="archive-class.html">
-        <span class="icon">🏆</span><span class="label">Archive Class</span>
+        <span class="icon">🗃️</span><span class="label">Archive Class</span>
       </a>
 
     </nav>

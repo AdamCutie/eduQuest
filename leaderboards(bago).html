@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500&display=swap" rel="stylesheet">
+  <title>EduQuest</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Fredoka', sans-serif;
+      background: radial-gradient(100% 259.2% at 72.65% 0%, #FFF8A7 16%, #FFA973 34%, #A4E8ED 72%);
+    }
+
+    header {
+      background-color: #5E4CC2;
+      padding: 0px 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .points{
+      background-color: white;
+      border-radius: 50px;
+      padding:12px;
+      text-align: center;
+    }
+
+    .menu-btn {
+      background-color: #5E4CC2;
+      color: white;
+      font-size: 25px;
+      border: none;
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: 5px;
+    }
+
+    .join-btn {
+      background-color: #00B894;
+      color: white;
+      font-size: 16px;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-left: auto;
+      text-align: center;
+    }
+
+    .join-btn:hover {
+      background-color: #019174;
+    }
+
+    .shop-btn,
+    .logo-btn,
+    .acc-btn {
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+
+    aside {
+      width: 60px;
+      background-color: #2F285B;
+      color: white;
+      padding: 15px 10px;
+      height: 100vh;
+      box-sizing: border-box;
+      position: fixed;
+      left: 0;
+      overflow: hidden;
+      transition: width 0.3s ease;
+      z-index: 1;
+    }
+
+    aside.hover-active:hover,
+    aside.show {
+      width: 300px;
+    }
+
+    aside nav a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      text-decoration: none;
+      color: white;
+      font-size: 18px;
+      background-color: #5E4CC2;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    aside nav a:hover {
+      background-color: black;
+    }
+
+    .icon {
+      font-size: 22px;
+      min-width: 30px;
+      text-align: center;
+    }
+
+    .label {
+      display: none;
+      margin-left: 15px;
+      white-space: nowrap;
+    }
+
+    aside.hover-active:hover .label,
+    aside.show .label {
+      display: inline;
+    }
+
+    .panel {
+      max-width: 1300px;
+      margin: 10px auto;
+      margin-left: 70px;
+      background-color: #5E4CC2;
+      border-radius: 8px;
+      padding-left: 10px;
+      padding-top: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: margin-left 0.3s ease;
+      height: 84vh; 
+      overflow-y: auto; 
+    }
+
+    aside.hover-active:hover ~ .panel,
+    aside.show ~ .panel {
+      margin-left: 300px;
+    }
+
+    .title {
+      text-align: center;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 500;
+      color: white;
+      margin-top: 30px;
+      text-shadow: 0 0 8px rgba(255, 255, 255, 1);
+    }
+
+    .leaderboad-panel {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 15px;
+      padding: 30px;
+    }
+
+    .leader-card {
+      background-color: rgba(255, 255, 255, 0.15);
+      padding: 20px;
+      border-radius: 15px;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 1.1rem;
+      transition: transform 0.2s ease;
+    }
+
+    .leader-card:hover {
+      transform: scale(1.03);
+      background-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .rank {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-right: 15px;
+    }
+
+    .name {
+      flex: 1;
+    }
+
+    .score {
+      font-weight: bold;
+      color: #FFD700;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <button class="menu-btn" onclick="toggleSidebar()">&#9776;</button>
+    <button class="logo-btn">
+      <a href="student-home.html"><img src="eduquest.png" alt="Eduquest Logo" style="height: 70px; width: auto;"></a>
+    </button>
+    <button class="join-btn">Join Class</button>
+    <span class="points">✨ 0.00</span>
+    <button class="shop-btn">
+      <a href="shop.html"><img src="shopping-cart.png" alt="cart" style="height: 40px; width: auto;"></a>
+    </button>
+    <button class="acc-btn">
+      <a href="account.html"><img src="account.png" alt="profile" style="height: 40px; width: auto;"></a>
+    </button>
+  </header>
+
+  <aside id="sidebar" class="hover-active">
+    <nav>
+      <a href="student-home.php">
+        <span class="icon">🏠</span><span class="label">Home</span>
+      </a>
+      <a href="student-task.html">
+        <span class="icon">📝</span><span class="label">Tasks</span>
+      </a>
+      <a href="leaderboards(bago).html">
+        <span class="icon">🏆</span><span class="label">Leaderboard</span>
+      </a>
+      <a href="archive-class.html">
+        <span class="icon">🗃️</span><span class="label">Archive Class</span>
+      </a>
+    </nav>
+  </aside>
+
+  <div class="panel">
+    <h1 class="title">LEADERBOARD</h1>
+    <div class="leaderboad-panel">
+      <div class="leader-card">
+        <span class="rank">1</span>
+        <span class="name">Alex Johnson</span>
+        <span class="score">980 pts</span>
+      </div>
+      <div class="leader-card">
+        <span class="rank">2</span>
+        <span class="name">Bianca Cruz</span>
+        <span class="score">920 pts</span>
+      </div>
+      <div class="leader-card">
+        <span class="rank">3</span>
+        <span class="name">Chris Evans</span>
+        <span class="score">870 pts</span>
+      </div>
+      <div class="leader-card">
+        <span class="rank">4</span>
+        <span class="name">Danielle Reyes</span>
+        <span class="score">830 pts</span>
+      </div>
+      <div class="leader-card">
+        <span class="rank">5</span>
+        <span class="name">Ethan Lee</span>
+        <span class="score">800 pts</span>
+      </div>
+    </div>
+
+    <!-- Periodical Exams Section -->
+    <h1 class="title">Periodical Exams</h1>
+    <div class="leaderboad-panel">
+      <div class="leader-card">
+        <span class="rank">1</span>
+        <span class="name">Alex Johnson</span>
+        <span class="score">95 pts</span>
+      </div>
+      <div class="leader-card">
+        <span class="rank">2</span>
+        <span class="name">Bianca Cruz</span>
+        <span class="score">88 pts</span>
+      </div>
+    </div>
+
+    <!-- Quizzes Section -->
+    <h1 class="title">Quizzes</h1>
+    <div class="leaderboad-panel">
+      <div class="leader-card">
+        <span class="rank">1</span>
+        <span class="name">Chris Evans</span>
+        <span class="score">85 pts</span>
+      </div>
+      <div class="leader-card">
+        <span class="rank">2</span>
+        <span class="name">Danielle Reyes</span>
+        <span class="score">78 pts</span>
+      </div>
+    </div>
+
+    <!-- Activities Section -->
+    <h1 class="title">Activities</h1>
+    <div class="leaderboad-panel">
+      <div class="leader-card">
+        <span class="rank">1</span>
+        <span class="name">Ethan Lee</span>
+        <span class="score">90 pts</span>
+      </div>
+      <div class="leader-card">
+        <span class="rank">2</span>
+        <span class="name">Alex Johnson</span>
+        <span class="score">85 pts</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('show');
+    }
+  </script>
+</body>
+</html>
